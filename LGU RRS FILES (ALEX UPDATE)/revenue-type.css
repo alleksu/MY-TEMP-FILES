@@ -1,0 +1,23 @@
+/* REVENUE TYPE PAGE
+══════════════════════════════════════ */
+.revenue-page-wrap { padding: 0 24px 32px; max-width: 900px; width: 100%; margin: 0 auto; }
+
+.rt-section-title { font-size: 14px; font-weight: 700; color: var(--text); padding: 13px 16px; border-bottom: 1px solid var(--gray-border); }
+
+/* Inline add row */
+.revtype-add-row td { background: #f9fafb; }
+.add-row-input {
+  width: 100%; border: 1.5px solid #e5e7eb; border-radius: 6px;
+  padding: 6px 9px; font-size: 13px; font-family: inherit;
+  background: white; outline: none; box-sizing: border-box;
+}
+.add-row-input:focus { border-color: var(--green); }
+.add-row-input::placeholder { color: #bbb; }
+.add-row-btn {
+  display: inline-flex; align-items: center;
+  background: white; border: 1.5px solid #e5e7eb;
+  border-radius: 6px; padding: 6px 12px;
+  font-size: 12px; font-weight: 600; color: #555;
+  cursor: pointer; font-family: inherit; transition: background .15s;
+}
+.add-row-btn:hover { background: #f0fdf4; color: var(--green); border-color: var(--green); }

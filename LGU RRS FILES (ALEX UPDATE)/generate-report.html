@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate Report — LGU RRS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="generate-report.css">
+</head>
+<body>
+<div id="page-app" class="page active" style="flex-direction:column">
+
+  <div class="topnav">
+    <div class="topnav-brand">
+      <img src="lgu.png">
+      <p style="margin:0"><span class="lgu-text">LGU</span><span class="rev-text">Revenue</span></p>
+    </div>
+    <div class="topnav-right">
+      <div class="topnav-user-pill">Manansala, Luffy D.</div>
+      <div class="topnav-avatar" onclick="doLogout()">LM</div>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <div class="sidebar">
+      <div class="sidebar-section-label">Main</div>
+      <div class="nav-item" onclick="window.location.href='dashboard.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor"/></svg>
+        Workspace
+      </div>
+      <div class="nav-item" onclick="window.location.href='record-payment.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2 3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M5 11h4M5 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Record Payment
+      </div>
+      <div class="nav-item" onclick="window.location.href='records.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 6h6M5 9h6M5 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Records
+      </div>
+      <div class="nav-item" onclick="window.location.href='revenue-type.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h6M5 8h6M5 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Revenue Type
+      </div>
+      <div class="sidebar-section-label">Administration</div>
+      <div class="nav-item active" onclick="window.location.href='generate-report.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2 14V2h8l4 4v8H2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 2v4h4M5 7h6M5 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Generate Report
+      </div>
+      <div class="nav-item" onclick="window.location.href='requests.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Requests
+      </div>
+      <div style="flex:1"></div>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg width="16" height="16" fill="none" viewBox="0 0 18 18"><path d="M7 3H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4M12 13l4-4-4-4M16 9H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Logout
+      </button>
+    </div>
+
+    <div class="main-content">
+      <div class="report-page-wrap">
+        <div class="page-header-row">
+          <div class="back-btn" onclick="window.location.href='dashboard.html'">←</div>
+          <div>
+            <div class="page-title">Revenue Summaries</div>
+            <div class="page-sub">Export revenue summaries and collection data</div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title">Report Parameters</div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Report Type</label>
+              <select class="form-select">
+                <option>Daily Collection Report</option>
+                <option>Monthly Revenue Summary</option>
+                <option>Annual Report</option>
+                <option>Revenue by Type</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">File Format</label>
+              <select class="form-select">
+                <option>PDF</option>
+                <option>Excel (XLSX)</option>
+                <option>CSV</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">From Date</label>
+              <input type="date" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">To Date</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
+          <div class="generate-actions" style="margin-top:16px">
+            <button class="btn-generate" onclick="showToast('Report generated successfully!')">GENERATE &amp; DOWNLOAD</button>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title">Recently Generated</div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Report Name</th><th>Type</th><th>Generated By</th><th>Date</th><th>Format</th><th></th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monthly Summary - Feb 2026</td>
+                  <td>Monthly Revenue</td>
+                  <td>Officer Manansala</td>
+                  <td>2026-02-25 03:32 PM</td>
+                  <td>PDF</td>
+                  <td><button class="download-btn" onclick="showToast('Downloading…')">↓ Download</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+</body>
+</html>
