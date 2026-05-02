@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — LGU RRS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="approve-reject.css">
+</head>
+<body>
+<div id="page-app" class="page active" style="flex-direction:column">
+
+  <div class="topnav">
+    <div class="topnav-brand">
+      <img src="lgu.png">
+      <p style="margin:0"><span class="lgu-text">LGU</span><span class="rev-text">Revenue</span></p>
+    </div>
+    <div class="topnav-right">
+      <div class="topnav-user-pill">Manansala, Luffy D.</div>
+      <div class="topnav-avatar" onclick="doLogout()">LM</div>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <div class="sidebar">
+      <div class="sidebar-section-label">Main</div>
+      <div class="nav-item active" onclick="window.location.href='dashboard.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor"/></svg>
+        Workspace
+      </div>
+      <div class="nav-item" onclick="window.location.href='record-payment.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2 3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M5 11h4M5 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Record Payment
+      </div>
+      <div class="nav-item" onclick="window.location.href='records.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 6h6M5 9h6M5 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Records
+      </div>
+      <div class="nav-item" onclick="window.location.href='revenue-type.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h6M5 8h6M5 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Revenue Type
+      </div>
+      <div class="sidebar-section-label">Administration</div>
+      <div class="nav-item" onclick="window.location.href='generate-report.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2 14V2h8l4 4v8H2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 2v4h4M5 7h6M5 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Generate Report
+      </div>
+      <div class="nav-item" onclick="window.location.href='requests.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Requests
+      </div>
+      <div style="flex:1"></div>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg width="16" height="16" fill="none" viewBox="0 0 18 18"><path d="M7 3H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4M12 13l4-4-4-4M16 9H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Logout
+      </button>
+    </div>
+
+    <div class="main-content">
+      <div class="dashboard-layout">
+
+        <!-- ── LEFT / CENTER ── -->
+        <div class="dash-center">
+
+          <div class="search-bar">
+            <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" stroke="#aaa" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" placeholder="Search payments, names, or receipts…">
+          </div>
+
+          <!-- Highlights Carousel -->
+          <div class="highlights-outer" id="highlights-outer">
+            <button class="hl-customize-btn" id="hl-customize-btn" title="Customize cards" onclick="openCustomizeModal()">⚙</button>
+            <button class="hl-arrow hl-arrow-prev" id="hl-prev">‹</button>
+            <div class="highlights-viewport" id="highlights-viewport">
+              <div class="highlights-track" id="highlights-track">
+
+                <div class="stat-card hl-card" data-card-id="hl-card-1">
+                  <div class="stat-card-label">Collected Today</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">🪙</div><div class="stat-value">₱ 12,300.00</div></div>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-2">
+                  <div class="stat-card-label">Payments Recorded</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">💳</div><div class="stat-value">47</div></div>
+                  <span class="stat-badge badge-green">Total Transactions</span>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-3">
+                  <div class="stat-card-label">Requests for Approval</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">📨</div><div class="stat-value">3</div></div>
+                  <span class="stat-badge badge-orange">Pending Approval</span>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-4">
+                  <div class="stat-card-label">Month-to-Date Collection</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">📆</div><div class="stat-value" style="font-size:20px">₱ 87,450.00</div></div>
+                  <div class="stat-sub" id="hl-mtd-sub">22 days this month</div>
+                  <div class="hl-progress-bg"><div class="hl-progress-fill hl-fill-green" id="hl-mtd-bar" style="width:73%"></div></div>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-5">
+                  <div class="stat-card-label">Daily Target</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">🎯</div><div class="stat-value" style="font-size:20px">₱ 12,300.00</div></div>
+                  <div class="stat-sub">82% of ₱ 15,000.00 target</div>
+                  <div class="hl-progress-bg"><div class="hl-progress-fill hl-fill-orange" style="width:82%"></div></div>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-6">
+                  <div class="stat-card-label">Shift Tracker</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">🕐</div><div class="stat-value" id="hl-shift-time" style="font-size:22px">--:--</div></div>
+                  <div class="stat-sub" id="hl-shift-remain">– remaining</div>
+                  <div class="hl-progress-bg"><div class="hl-progress-fill hl-fill-teal" id="hl-shift-bar" style="width:0%"></div></div>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-7">
+                  <div class="stat-card-label">Top Revenue Today</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">🏆</div><div class="stat-value" style="font-size:17px;line-height:1.2">Business Tax</div></div>
+                  <div class="stat-sub">₱ 5,200.00 · 3 transactions</div>
+                  <div class="hl-progress-bg"><div class="hl-progress-fill hl-fill-blue" style="width:42%"></div></div>
+                </div>
+
+                <div class="stat-card hl-card" data-card-id="hl-card-8">
+                  <div class="stat-card-label">Oldest Pending</div>
+                  <div class="stat-card-icon-row"><div class="stat-icon">⏳</div><div class="stat-value" style="font-size:20px">RCP-0011</div></div>
+                  <div class="stat-sub">Pending for <strong style="color:#c0392b">2 days</strong></div>
+                </div>
+
+              </div>
+            </div>
+            <button class="hl-arrow hl-arrow-next" id="hl-next">›</button>
+          </div>
+          <div class="hl-dots" id="hl-dots"></div>
+
+          <!-- Recent Records Panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Recent Payments</div>
+              <div class="panel-sub" onclick="window.location.href='records.html'" style="cursor:pointer">View all →</div>
+            </div>
+            <div class="record-row" onclick="window.location.href='records.html'">
+              <div class="avatar-circle">GS</div>
+              <div class="record-info">
+                <div class="record-name">Gomez, Selena A.</div>
+                <div class="record-meta">Business Permit · RCP-0012</div>
+              </div>
+              <div><div class="record-amount">₱ 2,000.00</div><div class="record-time">03:32 PM</div></div>
+            </div>
+            <div class="record-row" onclick="window.location.href='records.html'">
+              <div class="avatar-circle">MS</div>
+              <div class="record-info">
+                <div class="record-name">Man, Spider R.</div>
+                <div class="record-meta">Mayor's Permit · RCP-0011</div>
+              </div>
+              <div><div class="record-amount">₱ 1,850.00</div><div class="record-time">11:40 AM</div></div>
+            </div>
+            <div class="record-row" onclick="window.location.href='records.html'">
+              <div class="avatar-circle">TG</div>
+              <div class="record-info">
+                <div class="record-name">Tolomea, Gabriel</div>
+                <div class="record-meta">Business Tax · RCP-0010</div>
+              </div>
+              <div><div class="record-amount">₱ 1,000.00</div><div class="record-time">09:22 AM</div></div>
+            </div>
+
+            <!-- Bar chart -->
+            <div class="chart-wrap">
+              <div class="chart-header">
+                <div class="chart-title">Collections This Week</div>
+                <div class="chart-toggle">
+                  <button class="active">Week</button>
+                  <button>Month</button>
+                </div>
+              </div>
+              <div class="bars">
+                <div class="bar-col"><div class="bar" style="height:45%"></div><div class="bar-label">Mon</div></div>
+                <div class="bar-col"><div class="bar" style="height:70%"></div><div class="bar-label">Tue</div></div>
+                <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-label">Wed</div></div>
+                <div class="bar-col"><div class="bar" style="height:80%"></div><div class="bar-label">Thu</div></div>
+                <div class="bar-col"><div class="bar today" style="height:60%"></div><div class="bar-label">Fri</div></div>
+                <div class="bar-col"><div class="bar" style="height:20%"></div><div class="bar-label">Sat</div></div>
+                <div class="bar-col"><div class="bar" style="height:10%"></div><div class="bar-label">Sun</div></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- dash-center -->
+
+        <!-- ── RIGHT PANEL — Profile + Request History ── -->
+        <div class="dash-right">
+
+          <!-- Officer Badge -->
+          <div class="officer-badge">● On Duty</div>
+
+          <!-- Profile Card -->
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 14px;border-bottom:1px solid var(--gray-border)">
+            <div class="profile-avatar">LM</div>
+            <div class="profile-name">Manansala, Luffy D.</div>
+            <div class="profile-eid">Employee ID: EMP-20241</div>
+            <div class="profile-details" style="width:100%;text-align:left">
+              <div class="profile-detail-row">
+                <div class="profile-detail-icon">🏢</div>
+                <div>
+                  <div class="profile-detail-label">Department</div>
+                  <div class="profile-detail-val">Revenue Record Office</div>
+                </div>
+              </div>
+              <div class="profile-detail-row">
+                <div class="profile-detail-icon">📋</div>
+                <div>
+                  <div class="profile-detail-label">Role</div>
+                  <div class="profile-detail-val">Revenue Officer</div>
+                </div>
+              </div>
+              <div class="profile-detail-row">
+                <div class="profile-detail-icon">📍</div>
+                <div>
+                  <div class="profile-detail-label">Station</div>
+                  <div class="profile-detail-val">Municipal Hall, Window 2</div>
+                </div>
+              </div>
+              <div class="profile-detail-row">
+                <div class="profile-detail-icon">📞</div>
+                <div>
+                  <div class="profile-detail-label">Contact</div>
+                  <div class="profile-detail-val">0912-345-6789</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Request History -->
+          <div>
+            <div class="rh-header">
+              <div class="rh-title">My Recent Requests</div>
+              <div class="rh-today">Today</div>
+            </div>
+            <div class="rh-item">
+              <div class="rh-dot dot-pending"></div>
+              <div>
+                <div class="rh-rcp">RCP-0012</div>
+                <div class="rh-desc">Amount correction request</div>
+                <span class="status-pill pill-pending">Pending</span>
+              </div>
+            </div>
+            <div class="rh-item">
+              <div class="rh-dot dot-approved"></div>
+              <div>
+                <div class="rh-rcp">RCP-0010</div>
+                <div class="rh-desc">Remarks update</div>
+                <span class="status-pill pill-approved">Approved</span>
+              </div>
+            </div>
+            <div class="rh-item">
+              <div class="rh-dot dot-rejected"></div>
+              <div>
+                <div class="rh-rcp">RCP-0009</div>
+                <div class="rh-desc">Payee name edit</div>
+                <span class="status-pill pill-rejected">Rejected</span>
+              </div>
+            </div>
+            <div class="rh-item">
+              <div class="rh-dot dot-approved"></div>
+              <div>
+                <div class="rh-rcp">RCP-0007</div>
+                <div class="rh-desc">Type correction</div>
+                <span class="status-pill pill-approved">Approved</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- dash-right -->
+
+      </div><!-- dashboard-layout -->
+    </div><!-- main-content -->
+  </div><!-- app-body -->
+</div><!-- page-app -->
+
+<!-- Customize Highlights Modal -->
+<div class="modal-overlay" id="modal-customize">
+  <div class="modal customize-modal">
+    <div class="modal-title">✦ Customize Highlight Cards</div>
+    <div class="modal-sub">Choose which cards to display and drag to reorder them.</div>
+    <div class="cust-info"><span>💡</span> At least 1 card must remain visible. Drag <strong>⠿</strong> to reorder.</div>
+    <div class="cust-card-list" id="cust-card-list"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-customize')">Cancel</button>
+      <button class="btn-primary" style="width:auto;padding:10px 22px;margin-top:0" onclick="applyCustomizeCards()">Apply</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — LGU RRS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div id="page-login" class="page active">
+  <div class="login-left">
+    <img src="lgu.png" alt="LGU Logo">
+    <div class="login-left-title"><span>LGU</span> Revenue<br>Record System</div>
+    <div class="login-left-desc">Secure, efficient revenue collection management for Local Government Units. Track payments, generate reports, and maintain full audit trails.</div>
+    <div class="login-left-footer">Republic of the Philippines &nbsp;·&nbsp; Local Government Unit of Ginatilan</div>
+  </div>
+  <div class="login-right">
+    <div class="login-card">
+      <div class="login-card-header">
+        <div class="login-card-title">Municipality of Ginatilan</div>
+        <div class="login-card-sub">Welcome Back!</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ID Number</label>
+        <input type="text" class="form-input" id="login-id" placeholder="Enter your ID number">
+      </div>
+      <div class="form-group" style="margin-bottom:4px">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="login-pw" placeholder="Enter your password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <a class="forgot-link">Forgot password?</a>
+      <button class="btn-primary" onclick="doLogin()" style="margin-top:18px">SIGN IN</button>
+      <div class="register-link" style="margin-top:14px">Don't have an account? <a href="register.html">Register here</a></div>
+      <div class="login-card-footer">Sign in with your assigned credentials</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script src="login.js"></script>
+</body>
+</html>
