@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Type — LGU RRS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="approve-reject.css">
+<link rel="stylesheet" href="revenue-type.css">
+</head>
+<body>
+<div id="page-app" class="page active" style="flex-direction:column">
+
+  <div class="topnav">
+    <div class="topnav-brand">
+      <img src="lgu.png">
+      <p style="margin:0"><span class="lgu-text">LGU</span><span class="rev-text">Revenue</span></p>
+    </div>
+    <div class="topnav-right">
+      <div class="topnav-user-pill">Manansala, Luffy D.</div>
+      <div class="topnav-avatar" onclick="doLogout()">LM</div>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <div class="sidebar">
+      <div class="sidebar-section-label">Main</div>
+      <div class="nav-item" onclick="window.location.href='dashboard.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor"/></svg>
+        Workspace
+      </div>
+      <div class="nav-item" onclick="window.location.href='record-payment.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2 3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M5 11h4M5 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Record Payment
+      </div>
+      <div class="nav-item" onclick="window.location.href='records.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 6h6M5 9h6M5 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Records
+      </div>
+      <div class="nav-item active" onclick="window.location.href='revenue-type.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h6M5 8h6M5 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Revenue Type
+      </div>
+      <div class="sidebar-section-label">Administration</div>
+      <div class="nav-item" onclick="window.location.href='generate-report.html'">
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2 14V2h8l4 4v8H2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 2v4h4M5 7h6M5 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Generate Report
+      </div>
+<div style="flex:1"></div>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg width="16" height="16" fill="none" viewBox="0 0 18 18"><path d="M7 3H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4M12 13l4-4-4-4M16 9H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Logout
+      </button>
+    </div>
+
+    <div class="main-content">
+      <div class="revenue-page-wrap">
+        <div class="page-header-row">
+          <div>
+            <div class="page-title">Revenue Types</div>
+            <div class="page-sub">Manage collection categories and base rates</div>
+          </div>
+        </div>
+        <div class="records-toolbar">
+          <div class="search-bar" style="flex:1">
+            <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" stroke="#aaa" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" placeholder="Search revenue types…">
+          </div>
+          <button class="toolbar-lineitems-btn" onclick="openLineItemsPicker()" title="Line Items">
+            <svg width="15" height="15" fill="none" viewBox="0 0 10 10"><path d="M1 3h8M1 5.5h8M1 8h5" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Line Items
+          </button>
+        </div>
+        <div class="data-table-wrap">
+          <div class="rt-section-title">Revenue Types</div>
+          <table class="data-table" id="revtype-table">
+            <thead>
+              <tr><th>ID</th><th>Revenue Type</th><th>Base Amount</th><th>Surcharge (%)</th><th>Interest (%)</th><th></th><th></th></tr>
+            </thead>
+            <tbody id="revtype-tbody">
+              <tr>
+                <td>#001</td><td>Mayor's Permit</td><td>₱ 800.00</td>
+                <td>25%</td><td>2%</td>
+                <td><button class="action-edit-btn" onclick="editRevType(this)" title="Edit"><span class="btn-icon-rev"><svg width="10" height="10" fill="none" viewBox="0 0 10 10"><path d="M1 9l1.5-1.5 5-5L9 4 4 9H1Z" stroke="white" stroke-width="1" stroke-linejoin="round"/><path d="M6.5 2.5l1 1" stroke="white" stroke-width="1" stroke-linecap="round"/></svg></span></button></td>
+                <td><button class="action-remove-btn" onclick="removeRevType(this)" title="Remove"><span class="btn-icon-rev"><svg width="10" height="10" fill="none" viewBox="0 0 10 10"><path d="M1.5 3h7M4 3V2h2v1M2.5 3l.5 6h4l.5-6" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 5v2.5M6 5v2.5" stroke="white" stroke-width="1" stroke-linecap="round"/></svg></span></button></td>
+              </tr>
+              <tr>
+                <td>#002</td><td>Business Tax</td><td>₱ 500.00</td>
+                <td>25%</td><td>2%</td>
+                <td><button class="action-edit-btn" onclick="editRevType(this)" title="Edit"><span class="btn-icon-rev"><svg width="10" height="10" fill="none" viewBox="0 0 10 10"><path d="M1 9l1.5-1.5 5-5L9 4 4 9H1Z" stroke="white" stroke-width="1" stroke-linejoin="round"/><path d="M6.5 2.5l1 1" stroke="white" stroke-width="1" stroke-linecap="round"/></svg></span></button></td>
+                <td><button class="action-remove-btn" onclick="removeRevType(this)" title="Remove"><span class="btn-icon-rev"><svg width="10" height="10" fill="none" viewBox="0 0 10 10"><path d="M1.5 3h7M4 3V2h2v1M2.5 3l.5 6h4l.5-6" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 5v2.5M6 5v2.5" stroke="white" stroke-width="1" stroke-linecap="round"/></svg></span></button></td>
+              </tr>
+              <tr>
+                <td>#003</td><td>Real Property Tax</td><td>₱ 1,200.00</td>
+                <td>25%</td><td>2%</td>
+                <td><button class="action-edit-btn" onclick="editRevType(this)" title="Edit"><span class="btn-icon-rev"><svg width="10" height="10" fill="none" viewBox="0 0 10 10"><path d="M1 9l1.5-1.5 5-5L9 4 4 9H1Z" stroke="white" stroke-width="1" stroke-linejoin="round"/><path d="M6.5 2.5l1 1" stroke="white" stroke-width="1" stroke-linecap="round"/></svg></span></button></td>
+                <td><button class="action-remove-btn" onclick="removeRevType(this)" title="Remove"><span class="btn-icon-rev"><svg width="10" height="10" fill="none" viewBox="0 0 10 10"><path d="M1.5 3h7M4 3V2h2v1M2.5 3l.5 6h4l.5-6" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 5v2.5M6 5v2.5" stroke="white" stroke-width="1" stroke-linecap="round"/></svg></span></button></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="revtype-add-row">
+                <td>—</td>
+                <td><input type="text" class="add-row-input" id="add-rt-name" placeholder="New revenue type name…"></td>
+                <td><input type="number" class="add-row-input" id="add-rt-rate" placeholder="0.00"></td>
+                <td><input type="number" class="add-row-input" id="add-rt-surcharge" placeholder="0"></td>
+                <td><input type="number" class="add-row-input" id="add-rt-interest" placeholder="0"></td>
+                <td colspan="2"><button class="add-row-btn" onclick="addRevTypeInline()">+ Add</button></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Revenue Type Modal -->
+<div class="modal-overlay" id="modal-revtype">
+  <div class="modal">
+    <div class="modal-title" id="modal-revtype-title">Edit Revenue Type</div>
+    <div class="modal-sub">Update the details for this revenue type.</div>
+    <div class="form-group">
+      <label class="form-label">Revenue Type Name</label>
+      <input type="text" class="form-input" id="rt-name" placeholder="e.g. Building Permit">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <select class="form-select" id="rt-category">
+        <option>TAX</option><option>FEE</option><option>PERMIT</option>
+        <option>RENTAL</option><option>WATER</option><option>MARKET</option><option>OTHER</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Base Rate (₱)</label>
+      <input type="number" class="form-input" id="rt-rate" placeholder="0.00">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Surcharge (%)</label>
+      <input type="number" class="form-input" id="rt-surcharge" placeholder="0">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Interest (%)</label>
+      <input type="number" class="form-input" id="rt-interest" placeholder="0">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-revtype')">Cancel</button>
+      <button class="btn-primary" style="width:auto;padding:10px 20px;margin-top:0" onclick="saveRevType()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Line Items Picker Modal -->
+<div class="modal-overlay" id="modal-li-picker">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-title">Select Revenue Type</div>
+    <div class="modal-sub">Choose a revenue type to manage its line items.</div>
+    <div id="li-picker-list" class="li-picker-list"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-li-picker')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Line Items Modal -->
+<div class="modal-overlay" id="modal-lineitems">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-title" id="modal-lineitems-title">Line Items</div>
+    <div class="modal-sub" id="modal-lineitems-sub">Manage revenue line items for this type</div>
+    <table class="line-items-table" id="lineitems-table">
+      <thead>
+        <tr>
+          <th>Description</th><th>Qty</th><th>Base Amount</th><th>Surcharge</th><th>Interest</th><th>Line Total</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="lineitems-body"></tbody>
+    </table>
+    <button class="add-line-btn" onclick="addLineItemRow()" style="margin-top:8px">+ Add Item</button>
+    <div class="li-total-row">
+      <span class="total-label">Total Amount:</span>
+      <span class="total-value" id="li-grand-total">₱ 0.00</span>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-lineitems')">Close</button>
+      <button class="btn-primary" style="width:auto;padding:10px 20px;margin-top:0" onclick="saveLineItems()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script src="revenue-type.js"></script>
+</body>
+</html>
